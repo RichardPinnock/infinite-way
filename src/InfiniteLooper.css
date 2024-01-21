@@ -1,0 +1,79 @@
+/* Looper styles */
+@keyframes slideAnimVertical {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slideAnimHorizontal {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.looper {
+  width: 100%;
+  overflow: hidden;
+}
+.looper[data-orientation='vertical'] {
+  width: unset;
+  height: 100%;
+}
+
+.looper__innerList {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+}
+.looper__innerList[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+.looper__innerList[data-animate='true'][data-orientation='vertical']
+  .looper__listInstance {
+  animation: slideAnimVertical linear infinite;
+}
+.looper__innerList[data-animate='true'][data-orientation='horizontal']
+  .looper__listInstance {
+  animation: slideAnimHorizontal linear infinite;
+}
+
+.looper__listInstance {
+  display: flex;
+  width: max-content;
+
+  animation: none;
+}
+
+/* Bordes Corrousel */
+
+.flex-container {
+  position: relative;
+}
+
+.flex-container::before,
+.flex-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+.flex-container::after {
+  right: 0;
+  transform: rotateZ(180deg);
+}
+
+.dark .flex-container::before,
+.dark .flex-container::after {
+  background: linear-gradient(to right, rgb(17, 24, 39), rgba(0, 0, 0, 0));
+}
